@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="PHANTOM AI — искусственный интеллект, поиск и инструменты в минималистичном мобильном интерфейсе.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PHANTOM">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>PHANTOM AI</title>
+</head>
+<body>
+  <div class="app-shell" id="appShell">
+    <header class="topbar">
+      <button class="icon-button menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <a class="brand" href="#chat" aria-label="PHANTOM — главный экран">
+        <span class="brand-mark"><img src="/assets/icons/phantom-mark.svg" alt=""></span>
+        <span class="brand-word">PHANTOM</span>
+      </a>
+      <button class="icon-button" id="quickSettings" aria-label="Открыть настройки">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a7.9 7.9 0 0 1-1.5.9l-.3 1.8h-2.8l-.3-1.8a7.9 7.9 0 0 1-1.5-.9l-1.7.7-1.4-2.4L7 15a7 7 0 0 1 0-1.8l-1.4-1.1L7 9.7l1.7.7a7.9 7.9 0 0 1 1.5-.9l.3-1.8h2.8l.3 1.8a7.9 7.9 0 0 1 1.5.9l1.7-.7 1.4 2.4-1.4 1.1a7 7 0 0 1 0 1.8Z"/></svg>
+      </button>
+    </header>
+
+    <main class="main-content">
+      <section class="screen active" id="screen-chat" data-screen="chat" aria-labelledby="welcomeTitle">
+        <div class="home-content">
+          <div class="orb-wrap" aria-hidden="true"><div class="orb-halo"></div><div class="orb"><span></span></div><div class="orb-ring"></div><div class="orb-glint"></div></div>
+          <div class="welcome-copy">
+            <p class="eyebrow">YOUR PRIVATE AI SPACE</p>
+            <h1 id="welcomeTitle">Привет, <span>PHANTOM</span></h1>
+            <p class="muted welcome-subtitle">Задай вопрос, найди информацию<br class="desktop-break"> или выбери инструмент.</p>
+          </div>
+          <div class="quick-grid" aria-label="Быстрые действия">
+            <button class="quick-card" data-go="search">
+              <span class="quick-icon"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5M4.5 10.8h12.6M10.8 4c2 1.9 2.6 4.1 2.6 6.8s-.6 4.9-2.6 6.8M10.8 4c-2 1.9-2.6 4.1-2.6 6.8s.6 4.9 2.6 6.8"/></svg></span>
+              <span class="quick-title">Поиск в интернете</span><span class="quick-desc">Актуальная информация</span>
+            </button>
+            <button class="quick-card" data-prompt="Помоги проанализировать данные: ">
+              <span class="quick-icon"><svg viewBox="0 0 24 24"><path d="M4 19V9h4v10M10 19V5h4v14M16 19v-7h4v7M2 21h20"/></svg></span>
+              <span class="quick-title">Анализ данных</span><span class="quick-desc">Структура и выводы</span>
+            </button>
+            <button class="quick-card" data-prompt="Помоги написать или улучшить код: ">
+              <span class="quick-icon"><svg viewBox="0 0 24 24"><path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 3l-4 18"/></svg></span>
+              <span class="quick-title">Написать код</span><span class="quick-desc">Создание и оптимизация</span>
+            </button>
+            <button class="quick-card" data-go="tools">
+              <span class="quick-icon"><svg viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7l9-5Z"/><path d="m3.5 7.5 8.5 5 8.5-5M12 12.5V22"/></svg></span>
+              <span class="quick-title">Инструменты</span><span class="quick-desc">Полезные возможности</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen chat-screen" id="screen-conversation" data-screen="conversation" aria-label="Чат PHANTOM">
+        <div class="page-heading chat-heading"><button class="back-button" data-go="chat" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><div><p class="eyebrow">PHANTOM AI</p><h2 id="conversationTitle">Новый чат</h2></div><button class="icon-button small" id="newChatButton" aria-label="Новый чат"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div>
+        <div class="messages" id="messages" aria-live="polite"><div class="empty-chat"><div class="mini-orb"></div><h3>Начнём разговор?</h3><p class="muted">Напиши сообщение ниже — PHANTOM ответит, когда будет подключён ИИ.</p></div></div>
+        <form class="composer" id="chatForm">
+          <textarea id="messageInput" rows="1" placeholder="Напиши сообщение…" aria-label="Твоё сообщение" maxlength="12000"></textarea>
+          <div class="composer-tools"><button type="button" class="composer-tool" id="attachButton" aria-label="Вложения пока недоступны" title="Вложения добавим позже"><svg viewBox="0 0 24 24"><path d="m20 11.5-7.8 7.8a5 5 0 0 1-7.1-7.1l8.5-8.5a3.4 3.4 0 0 1 4.8 4.8l-8.5 8.5a1.8 1.8 0 0 1-2.5-2.5l7.8-7.8"/></svg></button><span class="model-pill"><span class="status-dot"></span> Groq · подключим позже</span><button type="submit" class="send-button" aria-label="Отправить сообщение"><svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button></div>
+        </form>
+        <p class="fine-print">Пока демо-интерфейс · ответы ИИ подключим после настройки сервера</p>
+      </section>
+
+      <section class="screen" id="screen-search" data-screen="search" aria-labelledby="searchTitle">
+        <div class="page-heading"><p class="eyebrow">DISCOVER</p><h1 id="searchTitle">Поиск</h1><p class="muted">Ищи темы, идеи и источники в одном месте.</p></div>
+        <form class="search-form" id="searchForm"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input id="searchInput" type="search" placeholder="Что ты хочешь найти?" autocomplete="off" aria-label="Поисковый запрос"><button type="submit" aria-label="Искать"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button></form>
+        <div class="filter-pills" role="group" aria-label="Тип поиска"><button class="filter-pill active" data-search-kind="internet">Интернет</button><button class="filter-pill" data-search-kind="repos">Репозитории</button><button class="filter-pill" data-search-kind="news">Новости</button></div>
+        <div class="section-title-row"><h2>Популярные запросы</h2><span class="muted tiny">ИДЕИ</span></div>
+        <div class="suggestion-list" id="searchSuggestions">
+          <button class="suggestion" data-query="Последние новости в сфере искусственного интеллекта"><span class="suggestion-symbol">↗</span><span>Последние новости ИИ</span><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button class="suggestion" data-query="Лучшие open-source GitHub репозитории для AI"><span class="suggestion-symbol">⌘</span><span>Лучшие GitHub-репозитории</span><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button class="suggestion" data-query="Новые технологии и разработки"><span class="suggestion-symbol">◈</span><span>Технологии будущего</span><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button class="suggestion" data-query="Как начать программировать и собрать первый проект"><span class="suggestion-symbol">&lt;/&gt;</span><span>Как начать программировать</span><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button class="suggestion" data-query="Объясни как проверить достоверность информации"><span class="suggestion-symbol">✓</span><span>Проверка достоверности</span><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+        </div>
+        <div class="notice-card"><span class="notice-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7h.01"/></svg></span><div><strong>Поиск подключим следующим этапом</strong><p class="muted">Экран уже готов. Живые результаты, ссылки и цитирование появятся после подключения поискового API.</p></div></div>
+      </section>
+
+      <section class="screen" id="screen-tools" data-screen="tools" aria-labelledby="toolsTitle">
+        <div class="page-heading"><p class="eyebrow">WORKSPACE</p><h1 id="toolsTitle">Инструменты</h1><p class="muted">Всё необходимое — в одном пространстве.</p></div>
+        <div class="tools-grid">
+          <button class="tool-card" data-prompt="Напиши текст на тему: "><span class="tool-icon"><svg viewBox="0 0 24 24"><path d="M5 3h11l4 4v14H5zM16 3v5h4M8 12h8M8 16h8"/></svg></span><strong>Генерация текста</strong><span>Создавай идеи, статьи и описания</span></button>
+          <button class="tool-card" data-prompt="Помоги написать код для задачи: "><span class="tool-icon"><svg viewBox="0 0 24 24"><path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 3l-4 18"/></svg></span><strong>Генерация кода</strong><span>Пиши, отлаживай и улучшай код</span></button>
+          <button class="tool-card" data-prompt="Проанализируй этот файл или текст: "><span class="tool-icon"><svg viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5zM15 3v5h4M8 12h8M8 16h5"/></svg></span><strong>Анализ файлов</strong><span>Подготовим загрузку и разбор</span></button>
+          <button class="tool-card" data-go="search"><span class="tool-icon"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></span><strong>Веб-поиск</strong><span>Актуальная информация и источники</span></button>
+          <button class="tool-card" data-prompt="Проверь утверждение на достоверность и укажи, какие источники нужны: "><span class="tool-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg></span><strong>Проверка фактов</strong><span>Отделяй факты от предположений</span></button>
+          <button class="tool-card" data-prompt="Помоги разобраться с изображением. После подключения добавим загрузку: "><span class="tool-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></span><strong>Изображения</strong><span>Загрузка и анализ — позже</span></button>
+          <button class="tool-card" data-prompt="Помоги спланировать задачу по шагам: "><span class="tool-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><strong>Планировщик</strong><span>Структурируй сложные задачи</span></button>
+          <button class="tool-card" data-prompt="Подскажи, как безопасно проверить свой проект на ошибки: "><span class="tool-icon"><svg viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7l9-5Z"/><path d="m8 12 2.5 2.5L16 9"/></svg></span><strong>Аудит проекта</strong><span>Проверка структуры и рисков</span></button>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-profile" data-screen="profile" aria-labelledby="profileTitle">
+        <div class="page-heading"><p class="eyebrow">YOUR SPACE</p><h1 id="profileTitle">Профиль</h1><p class="muted">Настрой PHANTOM под себя.</p></div>
+        <div class="profile-card"><div class="avatar"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></svg></div><div class="profile-info"><strong>Гость</strong><span class="muted">Локальный демо-режим</span></div><span class="guest-tag">FREE</span></div>
+        <div class="settings-group"><p class="settings-label">ПЕРСОНАЛИЗАЦИЯ</p>
+          <button class="settings-row" id="themeSetting"><span class="setting-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18Z"/></svg></span><span class="setting-copy"><strong>Тема оформления</strong><small>Скоро появятся новые темы</small></span><span class="setting-value">Dark</span><svg class="chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button class="settings-row" id="languageSetting"><span class="setting-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></span><span class="setting-copy"><strong>Язык</strong><small>Язык интерфейса</small></span><span class="setting-value">Русский</span><svg class="chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+        </div>
+        <div class="settings-group"><p class="settings-label">ИИ И ПОДКЛЮЧЕНИЯ</p>
+          <div class="settings-row static-row"><span class="setting-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"/></svg></span><span class="setting-copy"><strong>Модель ИИ</strong><small>Подключение Groq через сервер</small></span><span class="connection-tag">Не подключено</span></div>
+          <div class="settings-row static-row"><span class="setting-icon"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></span><span class="setting-copy"><strong>Веб-поиск</strong><small>Источники и проверка данных</small></span><span class="connection-tag">Позже</span></div>
+        </div>
+        <div class="settings-group"><p class="settings-label">ПРИЛОЖЕНИЕ</p>
+          <button class="settings-row" id="installSetting"><span class="setting-icon"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 17v4h16v-4"/></svg></span><span class="setting-copy"><strong>Установить приложение</strong><small>Добавить PHANTOM на экран «Домой»</small></span><svg class="chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button class="settings-row" id="aboutSetting"><span class="setting-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7h.01"/></svg></span><span class="setting-copy"><strong>О PHANTOM</strong><small>Версия 0.1.0 · первый прототип</small></span><svg class="chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+        </div>
+        <p class="profile-footer">PHANTOM AI · BUILT FOR YOUR POCKET</p>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Основная навигация">
+      <button class="nav-item active" data-go="chat" aria-current="page"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l-1 2v-5.2A7.5 7.5 0 1 1 20 11.5Z"/></svg><span>Чат</span></button>
+      <button class="nav-item" data-go="search"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><span>Поиск</span></button>
+      <button class="nav-item" data-go="tools"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Инструменты</span></button>
+      <button class="nav-item" data-go="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></svg><span>Профиль</span></button>
+    </nav>
+  </div>
+
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+  <aside class="drawer" id="drawer" aria-label="Меню PHANTOM" aria-hidden="true">
+    <div class="drawer-header"><a class="brand" href="#chat"><span class="brand-mark"><img src="/assets/icons/phantom-mark.svg" alt=""></span><span class="brand-word">PHANTOM</span></a><button class="icon-button" id="closeDrawer" aria-label="Закрыть меню"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <button class="drawer-new" id="drawerNewChat"><span>＋</span> Новый чат</button>
+    <div class="drawer-links"><p class="settings-label">РАБОЧЕЕ ПРОСТРАНСТВО</p><button data-go="chat"><span>◌</span> Чат</button><button data-go="search"><span>⌕</span> Поиск</button><button data-go="tools"><span>◇</span> Инструменты</button><button data-go="profile"><span>⚙</span> Настройки</button></div>
+    <div class="drawer-history"><p class="settings-label">НЕДАВНИЕ ЧАТЫ</p><div id="historyList"><p class="muted history-empty">Здесь появятся твои диалоги.</p></div></div>
+    <div class="drawer-bottom"><div class="avatar small-avatar"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></svg></div><div class="profile-info"><strong>Гость</strong><span class="muted">Бесплатный режим</span></div><span class="status-dot"></span></div>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/js/app.js" defer></script>
+</body>
+</html>

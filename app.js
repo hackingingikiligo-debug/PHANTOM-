@@ -126,6 +126,10 @@ async function sendMessage(text) {
   button.disabled = true;
   const waiting = addMessage('assistant', 'Проверяю подключение PHANTOM…');
   try {
+    if (location.hostname.endsWith('github.io')) {
+      waiting.querySelector('.message-bubble').textContent = 'Это статичная версия интерфейса на GitHub Pages. Для ответов TITAN.1.R открой приложение на Render после настройки TITAN_API_BASE_URL и TITAN_API_KEY.';
+      return;
+    }
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -134,7 +138,7 @@ async function sendMessage(text) {
     const result = await response.json().catch(() => ({}));
     if (!response.ok) {
       if (response.status === 503 || result.code === 'AI_NOT_CONFIGURED') {
-        waiting.querySelector('.message-bubble').textContent = 'PHANTOM пока в демо-режиме. Когда будем готовы к подключению, добавим GROQ_API_KEY в переменные окружения Render. Ключ не нужно вставлять сюда или в код браузера.';
+        waiting.querySelector('.message-bubble').textContent = 'PHANTOM запущен, но серверная модель TITAN.1.R ещё не настроена. Добавь TITAN_API_BASE_URL и TITAN_API_KEY в переменные окружения Render. Не вставляй ключ в браузер или GitHub.';
       } else {
         waiting.querySelector('.message-bubble').textContent = result.error || 'Не удалось получить ответ. Попробуй ещё раз позже.';
       }
@@ -213,7 +217,7 @@ window.addEventListener('hashchange', () => {
 
 // Register the PWA service worker when served from a secure origin.
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {
     // The app remains fully usable if service-worker installation is unavailable.
   }));
 }

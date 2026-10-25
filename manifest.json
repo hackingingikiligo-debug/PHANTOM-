@@ -1,19 +1,19 @@
 {
-  "id": "/",
+  "id": "./",
   "name": "PHANTOM AI",
   "short_name": "PHANTOM",
   "description": "Мобильное AI-пространство PHANTOM",
   "lang": "ru",
-  "start_url": "/#chat",
-  "scope": "/",
+  "start_url": "./#chat",
+  "scope": "./",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],
   "orientation": "portrait-primary",
   "background_color": "#080808",
   "theme_color": "#080808",
   "icons": [
-    { "src": "/assets/icons/pwa-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "/assets/icons/pwa-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "/assets/icons/pwa-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    { "src": "./assets/icons/pwa-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./assets/icons/pwa-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./assets/icons/pwa-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }

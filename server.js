@@ -124,25 +124,27 @@ async function handleChat(req, res) {
     sendJson(res, 413, { error: 'Сообщение слишком длинное. Максимум 12 000 символов.' }); return;
   }
 
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) {
+  const apiKey = process.env.TITAN_API_KEY;
+  const baseUrl = String(process.env.TITAN_API_BASE_URL || '').trim().replace(/\/+$/, '');
+  if (!apiKey || !baseUrl) {
     sendJson(res, 503, {
       code: 'AI_NOT_CONFIGURED',
-      error: 'PHANTOM запущен, но ИИ ещё не подключён. Добавь GROQ_API_KEY в переменные окружения сервера.'
+      error: 'PHANTOM запущен, но модель TITAN.1.R ещё не настроена. Добавь TITAN_API_BASE_URL и TITAN_API_KEY в переменные окружения сервера.'
     });
     return;
   }
-  const model = process.env.GROQ_MODEL || 'llama-3.3-70b-versatile';
+  const model = process.env.TITAN_MODEL || 'titan.1.R';
+  const endpoint = baseUrl.endsWith('/chat/completions') ? baseUrl : `${baseUrl}/chat/completions`;
   const abortController = new AbortController();
   const timeout = setTimeout(() => abortController.abort(), 45_000);
   try {
-    const upstream = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const upstream = await fetch(endpoint, {
       method: 'POST',
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model,
         messages: [
-          { role: 'system', content: 'Ты — PHANTOM AI, помощник, который отвечает по-русски, если пользователь не попросил другой язык. Будь полезным, честным и конкретным. Не утверждай, что искал в интернете или проверил источники, если соответствующий инструмент не был подключён.' },
+          { role: 'system', content: 'Ты — PHANTOM AI на модели TITAN.1.R. Отвечай по-русски, если пользователь не попросил другой язык. Будь полезным, честным и конкретным. Не утверждай, что искал в интернете или проверил источники, если соответствующий инструмент не был подключён.' },
           { role: 'user', content: payload.message.trim() }
         ],
         temperature: 0.7,
@@ -154,7 +156,7 @@ async function handleChat(req, res) {
     if (!upstream.ok) {
       // Do not relay upstream headers or key. Keep the response safe for the client.
       const status = upstream.status === 429 ? 429 : upstream.status >= 500 ? 502 : 502;
-      sendJson(res, status, { error: upstream.status === 429 ? 'Лимит запросов Groq исчерпан. Попробуй позже.' : 'Провайдер ИИ не смог обработать запрос. Проверь модель и настройки сервера.' });
+      sendJson(res, status, { error: upstream.status === 429 ? 'Лимит запросов модели исчерпан. Попробуй позже.' : 'Провайдер ИИ не смог обработать запрос. Проверь модель и настройки сервера.' });
       return;
     }
     const reply = result?.choices?.[0]?.message?.content;
@@ -174,7 +176,7 @@ export function createServer() {
     const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
     if (url.pathname === '/api/health') {
       if (req.method !== 'GET') { res.setHeader('Allow', 'GET'); sendJson(res, 405, { status: 'method_not_allowed' }); return; }
-      sendJson(res, 200, { status: 'ok', app: 'PHANTOM AI', version: '0.1.0', aiConfigured: Boolean(process.env.GROQ_API_KEY) });
+      sendJson(res, 200, { status: 'ok', app: 'PHANTOM AI', version: '0.1.0', aiConfigured: Boolean(process.env.TITAN_API_KEY && process.env.TITAN_API_BASE_URL) });
       return;
     }
     if (url.pathname === '/api/chat') { await handleChat(req, res); return; }
@@ -189,7 +191,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   const server = createServer();
   server.listen(PORT, HOST, () => {
     console.log(`PHANTOM AI is listening on ${HOST}:${PORT}`);
-    console.log(`AI: ${process.env.GROQ_API_KEY ? 'configured' : 'not configured (demo mode)'}`);
+    console.log(`TITAN.1.R: ${process.env.TITAN_API_KEY && process.env.TITAN_API_BASE_URL ? 'configured' : 'not configured (demo mode)'}`);
   });
   for (const signal of ['SIGINT', 'SIGTERM']) {
     process.on(signal, () => server.close(() => process.exit(0)));

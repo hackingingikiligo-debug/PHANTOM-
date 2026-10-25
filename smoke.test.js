@@ -6,7 +6,8 @@ let server;
 let baseUrl;
 
 test.before(async () => {
-  delete process.env.GROQ_API_KEY;
+  delete process.env.TITAN_API_KEY;
+  delete process.env.TITAN_API_BASE_URL;
   server = createServer();
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
   baseUrl = `http://127.0.0.1:${server.address().port}`;
@@ -21,6 +22,8 @@ test('serves the mobile-first app shell', async () => {
   const html = await response.text();
   assert.match(html, /PHANTOM AI/);
   assert.match(html, /bottom-nav/);
+  assert.match(html, /TITAN.1.R/);
+  assert.match(html, /\.\/css\/style\.css/);
 });
 
 test('serves css and JavaScript assets', async () => {
@@ -41,7 +44,7 @@ test('health endpoint does not expose secrets', async () => {
   assert.equal(Object.hasOwn(body, 'apiKey'), false);
 });
 
-test('chat endpoint gracefully explains that Groq is not configured', async () => {
+test('chat endpoint gracefully explains that TITAN is not configured', async () => {
   const response = await fetch(`${baseUrl}/api/chat`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ message: 'Привет' })
@@ -49,7 +52,7 @@ test('chat endpoint gracefully explains that Groq is not configured', async () =
   assert.equal(response.status, 503);
   const body = await response.json();
   assert.equal(body.code, 'AI_NOT_CONFIGURED');
-  assert.match(body.error, /GROQ_API_KEY/);
+  assert.match(body.error, /TITAN_API_BASE_URL/);
 });
 
 test('chat rejects an empty message', async () => {

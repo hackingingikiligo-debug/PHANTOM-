@@ -9,7 +9,9 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: GROQ_API_KEY
+      - key: TITAN_API_BASE_URL
         sync: false
-      - key: GROQ_MODEL
-        value: llama-3.3-70b-versatile
+      - key: TITAN_API_KEY
+        sync: false
+      - key: TITAN_MODEL
+        value: titan.1.R

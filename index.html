@@ -8,10 +8,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="PHANTOM">
-  <link rel="manifest" href="/manifest.json">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png">
-  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="./css/style.css">
   <title>PHANTOM AI</title>
 </head>
 <body>
@@ -21,7 +21,7 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
       <a class="brand" href="#chat" aria-label="PHANTOM — главный экран">
-        <span class="brand-mark"><img src="/assets/icons/phantom-mark.svg" alt=""></span>
+        <span class="brand-mark"><img src="./assets/icons/phantom-mark.svg" alt=""></span>
         <span class="brand-word">PHANTOM</span>
       </a>
       <button class="icon-button" id="quickSettings" aria-label="Открыть настройки">
@@ -64,7 +64,7 @@
         <div class="messages" id="messages" aria-live="polite"><div class="empty-chat"><div class="mini-orb"></div><h3>Начнём разговор?</h3><p class="muted">Напиши сообщение ниже — PHANTOM ответит, когда будет подключён ИИ.</p></div></div>
         <form class="composer" id="chatForm">
           <textarea id="messageInput" rows="1" placeholder="Напиши сообщение…" aria-label="Твоё сообщение" maxlength="12000"></textarea>
-          <div class="composer-tools"><button type="button" class="composer-tool" id="attachButton" aria-label="Вложения пока недоступны" title="Вложения добавим позже"><svg viewBox="0 0 24 24"><path d="m20 11.5-7.8 7.8a5 5 0 0 1-7.1-7.1l8.5-8.5a3.4 3.4 0 0 1 4.8 4.8l-8.5 8.5a1.8 1.8 0 0 1-2.5-2.5l7.8-7.8"/></svg></button><span class="model-pill"><span class="status-dot"></span> Groq · подключим позже</span><button type="submit" class="send-button" aria-label="Отправить сообщение"><svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button></div>
+          <div class="composer-tools"><button type="button" class="composer-tool" id="attachButton" aria-label="Вложения пока недоступны" title="Вложения добавим позже"><svg viewBox="0 0 24 24"><path d="m20 11.5-7.8 7.8a5 5 0 0 1-7.1-7.1l8.5-8.5a3.4 3.4 0 0 1 4.8 4.8l-8.5 8.5a1.8 1.8 0 0 1-2.5-2.5l7.8-7.8"/></svg></button><span class="model-pill"><span class="status-dot"></span> TITAN.1.R</span><button type="submit" class="send-button" aria-label="Отправить сообщение"><svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button></div>
         </form>
         <p class="fine-print">Пока демо-интерфейс · ответы ИИ подключим после настройки сервера</p>
       </section>
@@ -106,7 +106,7 @@
           <button class="settings-row" id="languageSetting"><span class="setting-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></span><span class="setting-copy"><strong>Язык</strong><small>Язык интерфейса</small></span><span class="setting-value">Русский</span><svg class="chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
         </div>
         <div class="settings-group"><p class="settings-label">ИИ И ПОДКЛЮЧЕНИЯ</p>
-          <div class="settings-row static-row"><span class="setting-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"/></svg></span><span class="setting-copy"><strong>Модель ИИ</strong><small>Подключение Groq через сервер</small></span><span class="connection-tag">Не подключено</span></div>
+          <div class="settings-row static-row"><span class="setting-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"/></svg></span><span class="setting-copy"><strong>Модель ИИ</strong><small>Модель TITAN.1.R через сервер</small></span><span class="connection-tag">Не подключено</span></div>
           <div class="settings-row static-row"><span class="setting-icon"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></span><span class="setting-copy"><strong>Веб-поиск</strong><small>Источники и проверка данных</small></span><span class="connection-tag">Позже</span></div>
         </div>
         <div class="settings-group"><p class="settings-label">ПРИЛОЖЕНИЕ</p>
@@ -127,13 +127,13 @@
 
   <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
   <aside class="drawer" id="drawer" aria-label="Меню PHANTOM" aria-hidden="true">
-    <div class="drawer-header"><a class="brand" href="#chat"><span class="brand-mark"><img src="/assets/icons/phantom-mark.svg" alt=""></span><span class="brand-word">PHANTOM</span></a><button class="icon-button" id="closeDrawer" aria-label="Закрыть меню"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <div class="drawer-header"><a class="brand" href="#chat"><span class="brand-mark"><img src="./assets/icons/phantom-mark.svg" alt=""></span><span class="brand-word">PHANTOM</span></a><button class="icon-button" id="closeDrawer" aria-label="Закрыть меню"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <button class="drawer-new" id="drawerNewChat"><span>＋</span> Новый чат</button>
     <div class="drawer-links"><p class="settings-label">РАБОЧЕЕ ПРОСТРАНСТВО</p><button data-go="chat"><span>◌</span> Чат</button><button data-go="search"><span>⌕</span> Поиск</button><button data-go="tools"><span>◇</span> Инструменты</button><button data-go="profile"><span>⚙</span> Настройки</button></div>
     <div class="drawer-history"><p class="settings-label">НЕДАВНИЕ ЧАТЫ</p><div id="historyList"><p class="muted history-empty">Здесь появятся твои диалоги.</p></div></div>
     <div class="drawer-bottom"><div class="avatar small-avatar"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></svg></div><div class="profile-info"><strong>Гость</strong><span class="muted">Бесплатный режим</span></div><span class="status-dot"></span></div>
   </aside>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="/js/app.js" defer></script>
+  <script src="./js/app.js" defer></script>
 </body>
 </html>

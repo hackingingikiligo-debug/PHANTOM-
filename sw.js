@@ -1,14 +1,14 @@
 const CACHE_NAME = 'phantom-ai-v0.1.0';
 const APP_SHELL = [
-  '/',
-  '/index.html',
-  '/css/style.css',
-  '/js/app.js',
-  '/manifest.json',
-  '/assets/icons/phantom-mark.svg',
-  '/assets/icons/pwa-192.png',
-  '/assets/icons/pwa-512.png',
-  '/assets/icons/apple-touch-icon.png'
+  './',
+  './index.html',
+  './css/style.css',
+  './js/app.js',
+  './manifest.json',
+  './assets/icons/phantom-mark.svg',
+  './assets/icons/pwa-192.png',
+  './assets/icons/pwa-512.png',
+  './assets/icons/apple-touch-icon.png'
 ];
 
 self.addEventListener('install', (event) => {
